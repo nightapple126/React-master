@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":disableRateLimiting",
+    ":label(renovate)",
+    ":rebaseStalePrs",
+    ":automergeBranch",
+    ":disableDependencyDashboard"
+  ],
+  "packageRules": [
+    {
+      "updateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ]
+}
