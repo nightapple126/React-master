@@ -1,0 +1,43 @@
+<div class="listcontainer">
+    <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              View Category
+              <div class="card-header-actions">
+                <button type="button" class="btn btn-sm btn-dark" routerLink="/categories">Go to Category List</button>
+              </div>
+            </div>
+            <div class="card-body">
+                <div class="row" *ngIf="categoryInfo!=null">
+                    <div class="col-md-3">
+                        <div class="view_left">
+                            <img [src]="mediaBase + '/images/categories/' + categoryInfo.category_image" *ngIf="categoryInfo.category_image"/>
+                            <img [src]="mediaBase + '/images/user/nouser.jpg'" *ngIf="!categoryInfo.category_image"/>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="view_right">
+                            <div class="view_right_row clearfix">
+                                <div class="view_right_label">Title</div>
+                                <div class="view_right_sep">:</div>
+                                <div class="view_right_value view_right_value_title">{{categoryInfo.title}}</div>
+                            </div>
+                            <div class="view_right_row clearfix">
+                                <div class="view_right_label">Status</div>
+                                <div class="view_right_sep">:</div>
+                                <div class="view_right_value">{{categoryInfo.status}}</div>
+                            </div>
+                            <div class="view_right_row clearfix noborder">
+                                <div class="view_right_label">Created Date</div>
+                                <div class="view_right_sep">:</div>
+                                <div class="view_right_value view_right_value_title">{{categoryInfo.create_date | amDateFormat:'LL'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

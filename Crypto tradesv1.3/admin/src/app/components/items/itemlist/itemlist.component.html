@@ -1,0 +1,101 @@
+<div class="listcontainer">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> Item List
+        </div>
+        <div class="card-body">
+          <div class="card-body-filter">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="name" placeholder="Search" [(ngModel)]="searchInput"
+                    (keyup.enter)="searchAction()">
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="card-body-filter-action">
+              <button type="button" class="btn btn-sm btn-dark" (click)="searchAction()"><i
+                  class="fa fa-search"></i>Search</button>
+              <button type="button" class="btn btn-sm btn-dark" (click)="resetAction()"><i
+                  class="fa fa-refresh"></i>Reset</button>
+            </div>
+          </div>
+          <table class="table table-bordered table-striped table-sm">
+            <thead>
+              <tr>
+                <th class="imagetd">Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Like Count</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of items">
+                <td class="imagetd">
+                  <img [src]="itemMediaBase +item.thumb" *ngIf="item.thumb" />
+                  <img [src]="mediaBase + '/images/user/nouser.jpg'" *ngIf="!item.thumb" />
+                </td>
+                <td class="nametd">
+                  <span *ngIf="item.name">
+                    {{item.name}}
+                  </span>
+                </td>
+                <td class="nametd">
+                  <span *ngIf="item.description">
+                    {{item.description}}
+                  </span>
+                </td>
+                <td class="nametd">
+                  <span *ngIf="item.price">
+                    {{item.price}}
+                  </span>
+                </td>
+                <td class="nametd">
+                  {{item.like_count}}
+                </td>
+                <td class="nametd">
+                  <span *ngIf="item.status">
+                    {{item.status}}
+                  </span>
+                </td>
+                <td class="nametd">
+                  <span *ngIf="item.create_date">
+                    {{item.create_date | amDateFormat:'LL'}}
+                  </span>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-sm" [routerLink]="'/items/view/' + item._id"><i class="fa fa-eye"></i></button>
+                </td>
+              </tr>
+              <tr *ngIf="items.length==0 && loading == false">
+                <td colspan="7">
+                  <alert type="info" ng-reflect-type="info">
+                    <div role="alert" class="alert alert-info" ng-reflect-ng-class="">
+                      <strong>Oops!</strong> No Data Found
+                    </div>
+                  </alert>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <nav>
+            <ul class="pagination">
+              <li class="page-item" *ngIf="page!=1"><a class="page-link" href="javascript:void(0)"
+                  (click)="prevPage()">Prev</a></li>
+              <li class="page-item" *ngIf="hasNextPage"><a class="page-link" href="javascript:void(0)"
+                  (click)="nextPage()">Next</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loader *ngIf="loading"></app-loader>

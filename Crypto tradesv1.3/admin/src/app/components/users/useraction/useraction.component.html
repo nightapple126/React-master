@@ -1,0 +1,97 @@
+<div class="listcontainer">
+    <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              {{page_title}}
+            </div>
+            <div class="card-body">
+                <form [formGroup]="register" (ngSubmit)="onSubmit(register)">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" placeholder="Enter Username" formControlName="username" required>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" placeholder="Enter Email" formControlName="email" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="first_name">First Name</label>
+                                <input type="text" class="form-control" placeholder="Enter First Name" formControlName="first_name" required>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="last_name">Last Name</label>
+                                <input type="text" class="form-control" placeholder="Enter Last Name" formControlName="last_name" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" placeholder="Enter Password" formControlName="password" autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="confirm_password">Confirm Password</label>
+                                <input type="password" class="form-control" placeholder="Enter Confirm Password" formControlName="confirm_password" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="inline-radios">Status</label>
+                        <div class="col-form-label">
+                            <div class="form-check form-check-inline mr-1" id="inline-radios">
+                            <input class="form-check-input" type="radio" formControlName="status"  id="inlineRadio1" value="active">
+                            <label class="form-check-label" for="inlineRadio1">Active</label>
+                            </div>
+                            <div class="form-check form-check-inline mr-1">
+                            <input class="form-check-input" type="radio" formControlName="status" id="inlineRadio2" value="inactive">
+                            <label class="form-check-label" for="inlineRadio2">Inactive</label>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="col-6">
+                        <label>Profile Image</label>
+                        <div class="uploader_btn_container">
+                           
+                            <button mat-menu-item class="btn btn-dark ">
+                                <i class="fa fa-camera-retro"></i>
+                                <span>Choose Profile Image</span>
+                            </button>
+                            <input type="file" ng2FileSelect [uploader]="uploader" (change)="uploadImage()" single />
+                            <img [src]="baseUrl + '/images/user/' + profile_image" *ngIf="profile_image.length>0" />
+                       </div>
+                    </div>
+
+                    </div>
+        
+
+                      <div class="row">
+                        <div class="col-6">
+                          <button type="submit" class="btn btn-primary px-4">{{button_title}}</button>
+                        </div>
+                      </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+<app-loader *ngIf="spinner"></app-loader>

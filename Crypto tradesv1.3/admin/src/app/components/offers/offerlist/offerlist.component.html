@@ -1,0 +1,55 @@
+<div class="listcontainer">
+    <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+                <i class="fa fa-align-justify"></i> Offer List
+            </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Item Name</th>
+                                <th>Price</th>
+                                <th>Sender name</th>
+                                <th>Reciever name</th>
+                                <th>Created Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let offer of offers">
+                                <td class="imagetd">
+                                    <img [src]="mediaBase + '/images/item/thumb/' + offer.item_id.thumb" />
+                                </td>
+                                <td class="nametd">{{offer.item_id.name}}</td>
+                                <td>{{offer.item_id.price}}</td>
+                                <td class="nametd" *ngIf="offer.sender.first_name.length === 0">{{offer.sender.username}}</td>
+                                <td class="nametd" *ngIf="offer.sender.first_name.length > 0">{{offer.sender.first_name + ' ' + offer.sender.last_name}}</td>
+                                <td class="nametd" *ngIf="offer.receiver.first_name.length === 0">{{offer.receiver.username}}</td>
+                                <td class="nametd" *ngIf="offer.receiver.first_name.length > 0">{{offer.receiver.first_name + ' ' + offer.receiver.last_name}}</td>
+                                <td>{{offer.created_date}}</td>
+                            </tr>
+                            <tr *ngIf="offers.length==0 && loading == false">
+                                <td colspan="6">
+                                    <alert type="info" ng-reflect-type="info">
+                                    <div role="alert" class="alert alert-info" ng-reflect-ng-class="">
+                                    <strong>Oops!</strong> No Data Found
+                                    </div>
+                                    </alert>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item" *ngIf="page!=1"><a class="page-link" href="javascript:void(0)" (click)="prevPage()">Prev</a></li>
+                            <li class="page-item" *ngIf="hasNextPage"><a class="page-link" href="javascript:void(0)" (click)="nextPage()">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-loader *ngIf="loading"></app-loader>

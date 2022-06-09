@@ -1,0 +1,99 @@
+<div class="listcontainer">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Collection List
+                </div>
+                <div class="card-body">
+                    <div class="card-body-filter">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="name" placeholder="Search"
+                                        [(ngModel)]="searchInput" (keyup.enter)="searchAction()">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="card-body-filter-action mb-2">
+                            <button type="button" class="btn btn-sm btn-dark" (click)="searchAction()"><i
+                                    class="fa fa-search"></i>Search</button>
+                            <button type="button" class="btn btn-sm btn-dark" (click)="resetAction()"><i
+                                    class="fa fa-refresh"></i>Reset</button>
+                            <!-- <button type="button" class="btn btn-sm btn-dark" routerLink='/collection/add'><i
+                                    class="fa fa-user-plus"></i> Add Collection</button> -->
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th class="imagetd">Image</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Banner</th>
+                                <th>Royalties</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let collection of collections">
+                                <td class="imagetd">
+                                    <img [src]="mediaBase + '/images/collection/logo/' + collection.image"
+                                        *ngIf="collection.image" />
+                                    <img [src]="mediaBase + '/images/collection/logo/nocollection.jpg'"
+                                        *ngIf="!collection.image" />
+                                </td>
+                                <td class="nametd">
+                                    {{collection.name}}
+                                </td>
+                                <td class="nametd">
+                                    {{collection.description}}
+                                </td>
+                                <td class="imagetd">
+                                    <img [src]="mediaBase + '/images/collection/banner/' + collection.banner"
+                                        *ngIf="collection.banner" />
+                                    <img [src]="mediaBase + '/images/collection/banner/nocollection.jpg'"
+                                        *ngIf="!collection.banner" />
+                                </td>
+                                <td class="nametd">
+                                    {{collection.royalties}}
+                                </td>
+                                <td>
+                                    <!-- <button type="button" class="btn btn-sm"
+                                        [routerLink]="'/categories/edit/' + category._id"><i
+                                            class="fa fa-edit"></i></button>
+                                    <button type="button" class="btn btn-sm"
+                                        (click)="selectedItem = category; confirmationModal.show()"><i
+                                            class="fa fa-trash"></i></button> -->
+                                    <button type="button" class="btn btn-sm"
+                                        [routerLink]="'/collections/view/' + collection._id"><i
+                                            class="fa fa-eye"></i></button>
+                                </td>
+                            </tr>
+                            <tr *ngIf="collections.length==0 && loading == false">
+                                <td colspan="7">
+                                    <alert type="info" ng-reflect-type="info">
+                                        <div role="alert" class="alert alert-info" ng-reflect-ng-class="">
+                                            <strong>Oops!</strong> No Data Found
+                                        </div>
+                                    </alert>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item" *ngIf="page!=1"><a class="page-link" href="javascript:void(0)"
+                                    (click)="prevPage()">Prev</a></li>
+                            <li class="page-item" *ngIf="hasNextPage"><a class="page-link" href="javascript:void(0)"
+                                    (click)="nextPage()">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-loader *ngIf="loading"></app-loader>

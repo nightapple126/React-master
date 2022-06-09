@@ -1,0 +1,54 @@
+<div class="listcontainer">
+    <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              View User
+              <div class="card-header-actions">
+                <button type="button" class="btn btn-sm btn-dark" routerLink="/users">Go to Users List</button>
+              </div>
+            </div>
+            <div class="card-body">
+                <div class="row" *ngIf="userInfo!=null">
+                    <div class="col-md-3">
+                        <div class="view_left">
+                            <img [src]="mediaBase + '/images/user/' + userInfo.profile_image" *ngIf="userInfo.profile_image.length>0"/>
+                            <img [src]="mediaBase + '/images/user/nouser.jpg'" *ngIf="userInfo.profile_image.length==0"/>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="view_right">
+                            <div class="view_right_row clearfix">
+                                <div class="view_right_label">User Name</div>
+                                <div class="view_right_sep">:</div>
+                                <div class="view_right_value view_right_value_title">{{userInfo.username}}</div>
+                            </div>
+                            <div class="view_right_row clearfix">
+                                <div class="view_right_label">Email</div>
+                                <div class="view_right_sep">:</div>
+                                <div class="view_right_value">{{userInfo.email}}</div>
+                            </div>
+                            <div class="view_right_row clearfix">
+                                <div class="view_right_label">First Name</div>
+                                <div class="view_right_sep">:</div>
+                                <div class="view_right_value">{{userInfo.first_name}}</div>
+                            </div>
+                            <div class="view_right_row clearfix">
+                                <div class="view_right_label">Last Name</div>
+                                <div class="view_right_sep">:</div>
+                                <div class="view_right_value">{{userInfo.last_name}}</div>
+                            </div>
+
+                            <div class="view_right_row clearfix noborder">
+                                <div class="view_right_label">Created Date</div>
+                                <div class="view_right_sep">:</div>
+                                <div class="view_right_value view_right_value_title">{{userInfo.create_date | amDateFormat:'LL'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

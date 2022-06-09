@@ -1,0 +1,15 @@
+// Here you can add other styles
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+.card-header { font-family: 'Lato', sans-serif; font-weight: 600;}
+body, .mat-body, .mat-body-1, .mat-typography {
+    font-family: 'Lato', sans-serif;
+}
+.table-bordered th, .table-bordered td {vertical-align: middle;}
+.listcontainer .card-body {overflow-x: auto;}
+.badge,.nametd {text-transform: capitalize;}
+.card-body-filter {display: flex; flex-direction: row;}
+.card-body-filter .row {flex: 1;}
+.card-body-filter-action button {margin-left: 10px; font-size: 14px; font-family: 'Lato', sans-serif; font-weight: 600; height: 35px;}
+.imagetd img {width: 40px; height: 40px; border-radius: 20px; object-fit: cover;}
+.imagetd {text-align: center; width: 80px;}
+.modal-header h4 {margin:0;}

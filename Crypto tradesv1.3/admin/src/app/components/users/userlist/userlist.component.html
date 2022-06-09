@@ -1,0 +1,97 @@
+<div class="listcontainer">
+    <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <i class="fa fa-align-justify"></i> User List
+            </div>
+            <div class="card-body">
+              <div class="card-body-filter">
+                <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="name" placeholder="Search" [(ngModel)]="searchInput" (keyup.enter)="searchAction()">
+                      </div>
+                    </div>
+                  </div><!--/.row-->
+                  <div class="card-body-filter-action">
+                    <button type="button" class="btn btn-sm btn-dark" (click)="searchAction()"><i class="fa fa-search"></i>Search</button>
+                    <button type="button" class="btn btn-sm btn-dark" (click)="resetAction()"><i class="fa fa-refresh"></i>Reset</button>
+                  </div>
+              </div>
+              <table class="table table-bordered table-striped table-sm">
+                <thead>
+                  <tr>
+                    <th class="imagetd">Image</th>
+                    <th>Username</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of users">
+                    <td class="imagetd">
+                        <img [src]="mediaBase + '/images/user/' + user.profile_image" *ngIf="user.profile_image.length>0"/>
+                        <img [src]="mediaBase + '/images/user/nouser.jpg'" *ngIf="user.profile_image.length==0"/>
+                    </td> 
+                    <td class="nametd">{{user.username}}</td>
+                    <td class="nametd">{{user.first_name}}</td>
+                    <td class="nametd">{{user.last_name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>
+                        <span class="badge" [ngClass]="{'badge-success': user.status === 'active', 'badge-secondary': user.status === 'inactive', 'badge-danger': user.status === 'blocked', 'badge-warning': user.status === 'reset'}">{{user.status}}</span>
+                    </td>
+                    <td *ngIf="user.status != 'blocked'">
+                        <button type="button" class="btn btn-sm" [routerLink]="'/users/edit/' + user._id"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-sm" (click)="selectedItem = user; confirmationModal.show()"><i class="fa fa-ban"></i></button>
+                        <button type="button" class="btn btn-sm" [routerLink]="'/users/view/' + user._id"><i class="fa fa-eye"></i></button>
+                    </td>
+                    <td *ngIf="user.status == 'blocked'">
+                      <button type="button" class="btn btn-sm" (click)="selectedItem = user;blockUserAction(false)"><i class="fa fa-lock"></i></button>
+                    </td>
+                  </tr>
+                  <tr *ngIf="users.length==0 && loading == false">
+                      <td colspan="7">
+                        <alert type="info" ng-reflect-type="info">
+                          <div role="alert" class="alert alert-info" ng-reflect-ng-class="">
+                           <strong>Oops!</strong> No Data Found
+                          </div>
+                        </alert>
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+              <nav>
+                <ul class="pagination">
+                  <li class="page-item" *ngIf="page!=1"><a class="page-link" href="javascript:void(0)" (click)="prevPage()">Prev</a></li>
+                  <li class="page-item" *ngIf="hasNextPage"><a class="page-link" href="javascript:void(0)" (click)="nextPage()">Next</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+<div bsModal #confirmationModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirmation</h4>
+        <button type="button" class="close" (click)="confirmationModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure to block this user?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="confirmationModal.hide()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="blockUserAction(true)">Confirm</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<app-loader *ngIf="loading"></app-loader>

@@ -1,0 +1,9 @@
+.card-header {line-height:30px}
+.view_left img{max-width: 100%;}
+.view_right_row {padding-bottom: 10px; margin-bottom: 10px; border-bottom:1px solid #e7e7e7}
+.view_right_row.noborder {border:0 none}
+.view_right_label, .view_right_value, .view_right_sep {display: inline-block; font-size: 15px;}
+.view_right_label {font-family: "lucidasansdemibold"; width: 24%;}
+.view_right_sep {width: 3%;}
+.view_right_value {width:73%}
+.view_right_value_title {text-transform: capitalize;}
